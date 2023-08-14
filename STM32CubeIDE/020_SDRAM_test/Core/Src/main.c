@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "stdlib.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -109,12 +109,12 @@ int main(void) {
 		tab[i] = rand() % 0x100;
 	}
 
-	for (int j = 0; j < 10; j++)
+	for (int j = 0; j < SDRAM_BANK_COUNT; j++)
 		for (int i = 0; i < 0x100; i++) {
 			*(__IO uint8_t*) (SDRAM_BANK_ADDR_START + (j * 0x100) + (1 * i)) = tab[i];
 		}
 
-	for (int j = 0; j < 10; j++)
+	for (int j = 0; j < SDRAM_BANK_COUNT; j++)
 		for (int i = 0; i < 0x100; i++) {
 			if ((*(__IO uint8_t*) (SDRAM_BANK_ADDR_START + (j * 0x100) + (1 * i))) != tab[i]) {
 				test_err[test_ok] = (SDRAM_BANK_ADDR_START + (j * 0x100) + (1 * i));
